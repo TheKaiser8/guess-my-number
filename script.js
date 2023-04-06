@@ -1,7 +1,7 @@
 'use strict';
 
 // creo il numero segreto casuale da indovinare (fuori dalla funzione evento, altrimenti il numero cambierebbe ad ogni click e il gioco non avrebbe significato)
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 let score = 20; // creo variabile score che parte da 20 (punteggio MAX)
 
@@ -49,4 +49,17 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.score').textContent = 0;
     }
   }
+});
+
+// Implemento funzionalità per ripristinare il gioco da zero cliccando sul tasto "Riprova!"
+document.querySelector('.again').addEventListener('click', function () {
+  secretNumber = Math.trunc(Math.random() * 20) + 1; // genero nuovo numero segreto
+  score = 20; // ripristino punteggio iniziale
+
+  document.querySelector('.score').textContent = score; // punteggio
+  document.querySelector('.message').textContent = 'Inizia a indovinare...'; // messaggio
+  document.querySelector('.guess').value = ''; // valore input
+  document.querySelector('body').style.backgroundColor = '#222'; // colore sfondo
+  document.querySelector('.number').textContent = '?'; // container numero segreto
+  document.querySelector('.number').style.width = '15rem'; // larghezza container numero segreto
 });
