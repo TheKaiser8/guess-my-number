@@ -2,8 +2,6 @@
 
 // creo il numero segreto casuale da indovinare (fuori dalla funzione evento, altrimenti il numero cambierebbe ad ogni click e il gioco non avrebbe significato)
 const secretNumber = Math.trunc(Math.random() * 20) + 1;
-console.log(secretNumber);
-document.querySelector('.number').textContent = secretNumber;
 
 let score = 20; // creo variabile score che parte da 20 (punteggio MAX)
 
@@ -19,6 +17,9 @@ document.querySelector('.check').addEventListener('click', function () {
     // Quando il giocatore indovina il numero segreto
   } else if (guess === secretNumber) {
     document.querySelector('.message').textContent = '🎉 Numero corretto!';
+    document.querySelector('body').style.backgroundColor = '#60b347'; // cambio il colore di sfondo
+    document.querySelector('.number').textContent = secretNumber; // svelo il numero nel container solamente quando il giocatore indovina
+    document.querySelector('.number').style.width = '30rem'; // cambio la larghezza del container del numero segreto
 
     // Quando il numero è superiore a 20 o minore di 0
   } else if (guess > 20 || guess < 0) {
