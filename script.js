@@ -24,8 +24,11 @@ const displayBgBody = function (color) {
 // creo variabile per non duplicare codice per la selezione della classe .number
 const displayNumber = document.querySelector('.number');
 
+// creo variabile per non duplicare codice per la selezione della classe .guess
+const displayGuessInput = document.querySelector('.guess');
+
 document.querySelector('.check').addEventListener('click', function () {
-  const guess = Number(document.querySelector('.guess').value); // salvo il valore in una variabile chiamata guess
+  const guess = Number(displayGuessInput.value); // salvo il valore in una variabile chiamata guess
   console.log(typeof guess, guess); // i valori ottenuti dall'UI, in questo caso da un campo input, sono solitamente stringhe per cui dobbiamo trasformarli in numeri
 
   // Quando non c'è l'input (non viene inserito alcun numero oppure viene inserito 0 che corrisponde a falso)
@@ -38,6 +41,8 @@ document.querySelector('.check').addEventListener('click', function () {
     displayBgBody('#60b347'); // cambio il colore di sfondo
     displayNumber.textContent = secretNumber; // svelo il numero nel container solamente quando il giocatore indovina
     displayNumber.style.width = '30rem'; // cambio la larghezza del container del numero segreto
+    displayGuessInput.disabled = true; // disabilita input
+    displayGuessInput.classList.add('arrow-disabled'); // disabilita frecce input guess
 
     // controllo highscore
     if (score > highscore) {
@@ -62,6 +67,8 @@ document.querySelector('.check').addEventListener('click', function () {
     } else {
       displayMessage('❌ Hai perso!');
       displayScore(0);
+      displayGuessInput.disabled = true;
+      displayGuessInput.classList.add('arrow-disabled'); // disabilita frecce input guess
     }
   }
 });
@@ -73,8 +80,10 @@ document.querySelector('.again').addEventListener('click', function () {
 
   displayScore(score); // punteggio
   displayMessage('Inizia a indovinare...'); // messaggio
-  document.querySelector('.guess').value = ''; // valore input
+  displayGuessInput.value = ''; // valore input
   displayBgBody('#222'); // colore sfondo
   displayNumber.textContent = '?'; // container numero segreto
   displayNumber.style.width = '15rem'; // larghezza container numero segreto
+  displayGuessInput.disabled = false; // abilita input
+  displayGuessInput.classList.remove('arrow-disabled'); // abilita frecce input guess
 });
