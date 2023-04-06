@@ -4,6 +4,7 @@
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 let score = 20; // creo variabile score che parte da 20 (punteggio MAX)
+let highscore = 0; // creo variabile highscore che parte da 0
 
 document.querySelector('.check').addEventListener('click', function () {
   // console.log(document.querySelector('.guess').value);
@@ -20,6 +21,12 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('body').style.backgroundColor = '#60b347'; // cambio il colore di sfondo
     document.querySelector('.number').textContent = secretNumber; // svelo il numero nel container solamente quando il giocatore indovina
     document.querySelector('.number').style.width = '30rem'; // cambio la larghezza del container del numero segreto
+
+    // controllo highscore
+    if (score > highscore) {
+      highscore = score;
+      document.querySelector('.highscore').textContent = highscore;
+    }
 
     // Quando il numero è superiore a 20 o minore di 0
   } else if (guess > 20 || guess < 0) {
